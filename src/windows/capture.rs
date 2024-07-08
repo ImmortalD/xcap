@@ -173,9 +173,11 @@ unsafe fn inne_capture_window(hwnd: HWND, scale_factor: f32) -> Result<(i32, i32
         Some(&mut bitmap as *mut BITMAP as *mut c_void),
     ) != 0
     {
-        width = bitmap.bmWidth;
-        height = bitmap.bmHeight;
-    }else{
+     //   width = bitmap.bmWidth;
+      //  height = bitmap.bmHeight;
+    }
+    
+    {
         width = (width as f32 * scale_factor) as i32;
         height = (height as f32 * scale_factor) as i32;
     }
