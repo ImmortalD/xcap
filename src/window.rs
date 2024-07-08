@@ -77,4 +77,8 @@ impl Window {
     pub fn capture_image(&self) -> XCapResult<RgbaImage> {
         self.impl_window.capture_image()
     }
+
+    pub fn capture_image_bgra_data(&self) -> XCapResult<Vec<u8>> {
+        self.impl_window.capture_image_bgra_data()
+    }
 }

@@ -1,5 +1,5 @@
 mod boxed;
-mod capture;
+pub mod capture;
 mod utils;
 
 pub mod impl_monitor;

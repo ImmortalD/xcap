@@ -15,7 +15,7 @@ use windows::{
 };
 
 use crate::error::{XCapError, XCapResult};
-
+use crate::platform::capture::capture_monitor_bgra_data;
 use super::{boxed::BoxHDC, capture::capture_monitor, utils::wide_string_to_string};
 
 // A 函数与 W 函数区别
@@ -128,7 +128,7 @@ impl ImplMonitor {
                 Some(monitor_enum_proc),
                 LPARAM(hmonitors_mut_ptr as isize),
             )
-            .ok()?;
+                .ok()?;
             Box::from_raw(hmonitors_mut_ptr)
         };
 
@@ -160,5 +160,9 @@ impl ImplMonitor {
 impl ImplMonitor {
     pub fn capture_image(&self) -> XCapResult<RgbaImage> {
         capture_monitor(self.x, self.y, self.width as i32, self.height as i32)
+    }
+
+    pub fn capture_image_bgra_data(&self) -> XCapResult<Vec<u8>> {
+        capture_monitor_bgra_data(self.x, self.y, self.width as i32, self.height as i32)
     }
 }

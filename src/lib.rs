@@ -19,3 +19,6 @@ pub use image;
 pub use error::{XCapError, XCapResult};
 pub use monitor::Monitor;
 pub use window::Window;
+
+#[cfg(target_os = "windows")]
+pub use platform::capture;

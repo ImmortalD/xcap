@@ -26,7 +26,7 @@ use crate::{
     error::XCapResult,
     platform::{boxed::BoxProcessHandle, utils::log_last_error},
 };
-
+use crate::platform::capture::capture_window_bgra_data;
 use super::{
     capture::capture_window,
     impl_monitor::ImplMonitor,
@@ -356,5 +356,10 @@ impl ImplWindow {
     pub fn capture_image(&self) -> XCapResult<RgbaImage> {
         // TODO: 在win10之后，不同窗口有不同的dpi，所以可能存在截图不全或者截图有较大空白，实际窗口没有填充满图片
         capture_window(self.hwnd, self.current_monitor.scale_factor)
+    }
+
+    pub fn capture_image_bgra_data(&self) -> XCapResult<Vec<u8>> {
+        // TODO: 在win10之后，不同窗口有不同的dpi，所以可能存在截图不全或者截图有较大空白，实际窗口没有填充满图片
+        capture_window_bgra_data(self.hwnd, self.current_monitor.scale_factor)
     }
 }
