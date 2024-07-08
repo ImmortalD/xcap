@@ -175,11 +175,11 @@ unsafe fn inne_capture_window(hwnd: HWND, scale_factor: f32) -> Result<(i32, i32
     {
         width = bitmap.bmWidth;
         height = bitmap.bmHeight;
+    }else{
+        width = (width as f32 * scale_factor) as i32;
+        height = (height as f32 * scale_factor) as i32;
     }
-
-    width = (width as f32 * scale_factor) as i32;
-    height = (height as f32 * scale_factor) as i32;
-
+    
     // 内存中的HDC，使用 DeleteDC 函数释放
     // https://learn.microsoft.com/zh-cn/windows/win32/api/wingdi/nf-wingdi-createcompatibledc
     let box_hdc_mem = BoxHDC::new(CreateCompatibleDC(*box_hdc_window), None);
