@@ -1,5 +1,6 @@
 use fs_extra::dir;
 use std::time::Instant;
+use xcap::capture::capture_window_bgra_data;
 use xcap::Window;
 
 fn normalized(filename: &str) -> String {
@@ -30,14 +31,16 @@ fn main() {
             (window.is_minimized(), window.is_maximized())
         );
 
-        let image = window.capture_image().unwrap();
-        image
-            .save(format!(
-                "target/windows/window-{}-{}.png",
-                i,
-                normalized(window.title())
-            ))
-            .unwrap();
+        if window.title().contains("xcap – capture.rs") || window.title().contains("地下城与") {
+            let image = window.capture_image().unwrap();
+            image
+                .save(format!(
+                    "target/windows/window-{}-{}.png",
+                    i,
+                    normalized(window.title())
+                ))
+                .unwrap();
+        }
 
         i += 1;
     }
